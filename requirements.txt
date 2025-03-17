@@ -1,0 +1,8 @@
+google-auth
+google-api-core
+google-cloud-aiplatform
+fastapi
+uvicorn
+fastapi-cors
+python-dotenv
+
