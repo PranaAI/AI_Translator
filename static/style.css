@@ -1,0 +1,245 @@
+/* style.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #3f3f3f;
+}
+
+.heading {
+    text-align: center;
+    margin: 2vh 0;
+    display: flex;
+
+}
+
+h1 {
+    color: #009e7d;
+    font-family: sans-serif;
+    font-size: 30px;
+    text-align: right;
+    padding-left: 8%;
+}
+
+select#systemInstructionList {
+    background-color: #5d9596;
+    cursor: pointer;
+    outline: none;
+    border-radius: 10px;
+    font-family: sans-serif;
+    font-size: 13px;
+    text-align: center;
+    font-weight: 800;
+    padding: 8px;
+    margin: 20px 15px 20px auto;
+    border : none;
+}
+
+option {
+ cursor: pointer;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2vw;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    height: 80vh;
+
+    padding:1vh;
+    background: #232323;
+    border-radius: 10px;
+}
+
+textarea {
+    width: 100%;
+    height: 75vh;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    resize: align;
+    font-size: 15px;
+    resize: none;
+    outline: none;
+    background: #232323;
+    border: 0px;
+    line-height: 2;
+}
+
+
+#systemInstruction{
+    display: none;
+    flex-direction: column;
+    height: 20vh;
+    gap: 1vh;
+    padding:10px;
+}
+
+#inputText {
+    display: flex;
+    flex-direction: column;
+    height: 75vh;
+    gap: 1vh;
+    padding:10px;
+    resize: none;
+    outline: none;
+    background: #232323;
+    border: 0px;
+    line-height: 2;
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+#outputText {
+color: white;
+font-family: sans-serif;
+font-size: 16px;
+}
+
+
+
+.output-section textarea {
+    height: 75vh;
+}
+
+
+
+/* Center buttons and make them wider */
+#translateBtn, #copyBtn {
+    display: block;
+    margin: 10px auto; /* Centers horizontally */
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    max-width: 400px; /* Optionally cap the width */
+    margin: 0 0 0 auto;
+}
+
+
+/* Translate button styles */
+#translateBtn {
+    background-color: transparent; /* Blue */
+}
+
+#translateBtn:hover {
+     background-color: rgba(0, 86, 179, 0.35); /* Slightly darker blue with transparency */
+}
+
+
+/* Copy button styles */
+#copyBtn {
+    background-color: transparent; /* Green */
+    color: white;
+    filter: invert(1);
+}
+
+#copyBtn:hover {
+    background-color: #1e7e34;
+}
+
+
+.output-section {
+    width: 60vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background: #232323;
+    border-radius: 10px;
+    position: relative; /* Make the section a positioning reference */
+}
+
+#loadingScreen {
+    display: none; /* Hidden by default */
+    position: absolute; /* Position relative to the output section */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px; /* Match the container's border-radius */
+}
+
+.spinner {
+    border: 8px solid rgba(255, 255, 255, 0.3);
+    border-top: 8px solid white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+/* Spinner Animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+@media only screen and (max-width: 600px) {
+
+
+    h1 {
+        font-size: 17px;
+        text-align: left;
+        padding-left: 4%;
+    }
+
+    select#systemInstructionList {
+        padding: 0px;
+        width: 108px;
+        height: 26px;
+        margin: 10px 16px 0px auto;
+    }
+
+
+    .container {
+        display: grid;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 3vw;
+    }
+    .input-section {
+        display: flex;
+        flex-direction: column;
+        width: 90vw;
+        height: 35vh;
+        gap: 1vh;
+        padding: 10px;
+        background: #232323;
+        border-radius: 10px;
+    }
+
+    .output-section {
+        width: 90vw;
+        height: 45vh;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        background: #232323;
+        border-radius: 10px;
+    }
+
+  }

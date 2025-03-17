@@ -1,0 +1,51 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Translator</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="heading">
+        <h1>AI Translator</h1>
+    <select id="systemInstructionList">
+    </select>
+    <a href="/static/edit_instructions.html" style="align-content: center;margin-right: 35px;">
+        <img src="edit-svgrepo-com.svg" alt="Edit" width="30" height="30">
+</a>
+    </div>
+
+
+    <div class="container">
+        <div class="input-section">
+            <textarea id="inputText" placeholder="Add text to translate"></textarea>
+            <button title="Shift+Enter" id="translateBtn" class="translate-button">
+                <img src="send-svgrepo-com.svg" alt="Submit" width="40" height="40">
+
+            </button>
+        </div>
+
+
+        <div class="output-section">
+            <!-- Loading Screen -->
+            <div id="loadingScreen">
+                <div class="spinner"></div>
+            </div>
+            <label for="outputText" style="display: none;">Translated Text:</label>
+            <textarea id="outputText"  placeholder="Translation will appear here"></textarea>
+            <button id="copyBtn" class="copy-button">
+
+                <img src="copy-svgrepo-com.svg" alt="Submit" width="40" height="40">
+            </button>
+        </div>
+    </div>
+    <script src="config.js"></script>
+    <script src="populate_language_names.js"></script>
+    <script src="translate_text.js"></script>
+    <script src="show_output.js"></script>
+
+
+</body>
+
+
+</html>
