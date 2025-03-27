@@ -1,0 +1,1 @@
+Put the credentials.json file in teh private folder

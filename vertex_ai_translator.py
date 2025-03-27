@@ -42,7 +42,7 @@ class VertexAIWrapper:
 def translate_with_gemini(
         prompt: str,
         system_instruction: list = None,
-        project_id: str = "ai-translator-444310",
+        project_id: str = os.environ.get("project_id"),
         location: str = os.environ.get("GOOGLE_CLOUD_REGION", "us-central1"),
         model_id: str = "gemini-1.5-pro-002",
         temperature: float = 0.9,

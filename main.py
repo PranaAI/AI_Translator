@@ -24,7 +24,6 @@ origins = [
     "http://localhost:8100",
     "http://127.0.0.1:8100",
     "http://0.0.0.0:8100",
-    "http://150.230.138.1:8100"
 ]
 
 app.add_middleware(
@@ -151,7 +150,7 @@ async def translate_endpoint(request: TranslationRequest):
     Returns:
         TranslationResponse: A dictionary containing the translated text.
     Raises:
-         HTTPException: If something goes wrong during the process.
+        HTTPException: If something goes wrong during the process.
     """
     logging.info(
         f"Received translation request with instruction ID: {request.instruction_id}")
@@ -165,7 +164,8 @@ async def translate_endpoint(request: TranslationRequest):
     try:
         response = translate_with_gemini(
             prompt=request.prompt,
-            system_instruction=[system_instruction]
+            system_instruction=[system_instruction],
+            model_id= "gemini-1.5-pro-002",
         )
         return {"translated_text": response["translated_text"]}
     except Exception as e:
