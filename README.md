@@ -16,8 +16,9 @@ This document provides a step-by-step guide to setting up the AI Translator appl
 - [5. Installing Required Packages](#5-installing-required-packages)
 - [6. Running the AI Translator](#6-running-the-ai-translator)
 - [7. Configuring Authentication (credentials.json)](#7-configuring-authentication-credentialsjson)
-- [8. Resource Considerations](#8-resource-considerations)
-- [9. Attribution](#9-attribution)
+- [8. Using API key instead of credentials file](#8-using-api-key-instead-of-credentials-file)
+- [9. Resource Considerations](#9-resource-considerations)
+- [10. Attribution](#10-attribution)
 
 ---
 
@@ -205,7 +206,19 @@ Now will have all the new changes:
 
 *With this, You can translate now.*
 
-# 8. Resource Considerations
+
+# 8. Using API key instead of credentials file
+
+* Inside the `.env` file 
+```dotenv
+GEMINI_API_KEY=""
+```
+* Put your API key from Google here
+* Current code uses this API key instead of the credentials file
+* We have added the `generate` function inside the `vertex_ai_translator.py` file.
+
+
+# 9. Resource Considerations
 
 *   Install PyCharm Community edition Or Install VS Code
 * I prefer Pycharm because it creates the Virtual environment automatically 
@@ -213,7 +226,7 @@ Now will have all the new changes:
 * But for final running a simple terminal is enough so that RAM is consumed very less.
 
 
-# 9. Attribution
+# 10. Attribution
 
 Icons and SVGs used in this project are sourced from [SVG Repo](https://www.svgrepo.com/).
 
