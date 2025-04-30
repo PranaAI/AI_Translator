@@ -193,5 +193,5 @@ async def root(request: Request):
 if __name__ == "__main__":
     import uvicorn
 
-    # uvicorn.run("main:app", host="0.0.0.0", port=8100)
-    uvicorn.run(app, port=8100)  # for localhost
+    uvicorn.run("main:app", host="0.0.0.0", port=8100)
+    # uvicorn.run(app, port=8100)  # for localhost
