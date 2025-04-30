@@ -171,7 +171,7 @@ async def translate_endpoint(request: TranslationRequest):
         # )
         # print("system_instruction: ", system_instruction)
         user_input_wrapped = f'"""{request.prompt}"""'
-        response = vertex_ai_translator.generate(user_input=user_input_wrapped, system_instruction_text=system_instruction)
+        response = vertex_ai_translator.generate(user_input=user_input_wrapped, system_instruction_text=system_instruction, model="gemini-2.5-flash-preview-04-17")
         # print("response: ", response)
         return {"translated_text": response["translated_text"]}
     except Exception as e:
