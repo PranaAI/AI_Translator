@@ -1,6 +1,8 @@
 from fastapi import FastAPI, HTTPException, Body, Request
 from pydantic import BaseModel
 from typing import List, Optional, Dict
+
+import vertex_ai_translator
 from vertex_ai_translator import translate_with_gemini
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -162,11 +164,14 @@ async def translate_endpoint(request: TranslationRequest):
         raise HTTPException(status_code=400, detail="Invalid instruction ID")
 
     try:
-        response = translate_with_gemini(
-            prompt=request.prompt,
-            system_instruction=[system_instruction],
-            model_id= "gemini-1.5-pro-002",
-        )
+        # response = translate_with_gemini(
+        #     prompt=request.prompt,
+        #     system_instruction=[system_instruction],
+        #     model_id= "gemini-1.5-pro-002",
+        # )
+        # print("system_instruction: ", system_instruction)
+        response = vertex_ai_translator.generate(user_input=request.prompt, system_instruction_text=system_instruction)
+        # print("response: ", response)
         return {"translated_text": response["translated_text"]}
     except Exception as e:
         logging.exception(f"Translation failed: {e}")

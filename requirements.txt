@@ -5,4 +5,7 @@ fastapi
 uvicorn
 fastapi-cors
 python-dotenv
+google-genai
+google
+
 

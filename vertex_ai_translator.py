@@ -1,5 +1,10 @@
 import os
+from typing import List, Optional, Dict, Any
+
+import google
 import vertexai
+from google import genai
+from google.genai import types
 from vertexai.generative_models import (
     GenerationConfig,
     GenerativeModel,
@@ -37,6 +42,117 @@ class VertexAIWrapper:
         if not self.model:
             raise ValueError("Vertex AI model not initialized.")
         return self.model.count_tokens(content).total_tokens
+
+
+def generate(user_input: str,
+             model: str = "gemini-2.0-flash",
+             contents: Optional[List[types.Content]] = None,
+             response_mime_type: Optional[str] = None,
+             response_schema: Optional[google.genai.types.Schema] = None,
+             system_instruction_text: Optional[str] = None,
+             ) -> dict[str, str]:
+    """
+    Generates content using the Gemini model.
+
+    Args:
+        model (str, optional): The name of the Gemini model to use. Defaults to "gemini-pro".
+        contents (List[types.Content], optional): A list of content objects representing the chat history. Defaults to None.
+        response_mime_type (str, optional): The MIME type of the response. Defaults to None.
+        response_schema (google.genai.types.Schema, optional): The schema of the response. Defaults to None.
+        system_instruction_text (str, optional): System instructions for the model. Defaults to None.
+        user_input (str, optional): The user's input message. Defaults to "".
+
+    Returns:
+        str: The generated content.
+    """
+    # Initialize client here to avoid issues with mocking
+    client = genai.Client(
+        api_key=os.environ.get("GEMINI_API_KEY", "YOUR_API_KEY")  # Provide a default API key or ensure the environment variable is set
+    )
+
+    # Initialize contents if it's None
+    if contents is None:
+        contents = []
+
+    # Add the new user input to the contents
+    user_content = types.Content(
+        role="user",
+        parts=[types.Part.from_text(text=user_input)],
+    )
+    contents.append(user_content)
+    # print(contents)
+
+    generate_content_config = types.GenerateContentConfig(
+        response_mime_type=response_mime_type,
+        response_schema=response_schema,
+        system_instruction=[types.Part.from_text(text=system_instruction_text)] if system_instruction_text else [],
+    )
+    # print(generate_content_config)
+
+    full_text = ""
+    try:
+        for chunk in client.models.generate_content_stream(
+                model=model,
+                contents=contents,
+                config=generate_content_config,
+        ):
+            if hasattr(chunk, "text"):
+                full_text += chunk.text
+        # print("full_text: ", full_text)
+        return {"translated_text": full_text}
+    except Exception as ex:
+        print(f"Error during content generation: {ex}")
+        return {"error": f"Error:  + {str(ex)}"}
+
+# def generate(model: str,
+#              contents: List[types.Content],
+#              response_mime_type: str,
+#              response_schema: google.genai.types.Schema,
+#              system_instruction_text: str,
+#              user_input: str) -> str:
+#     """
+#     Generates content using the Gemini model.
+#
+#     Args:
+#         model (str): The name of the Gemini model to use.
+#         contents (List[types.Content]): A list of content objects representing the chat history.
+#         response_mime_type (str): The MIME type of the response.
+#         response_schema (google.genai.types.Schema): The schema of the response.
+#         system_instruction_text (str): System instructions for the model.
+#         user_input (str): The user's input message.
+#
+#     Returns:
+#         str: The generated content.
+#     """
+#     client = genai.Client(
+#         api_key=os.environ.get("GEMINI_API_KEY")
+#     )
+#
+#     # Add the new user input to the contents
+#     user_content = types.Content(
+#         role="user",
+#         parts=[types.Part.from_text(text=user_input)],
+#     )
+#     contents.append(user_content)
+#
+#     generate_content_config = types.GenerateContentConfig(
+#         response_mime_type=response_mime_type,
+#         response_schema=response_schema,
+#         system_instruction=[
+#             types.Part.from_text(text=system_instruction_text)],
+#     )
+#
+#     full_text = ""
+#
+#     for chunk in client.models.generate_content_stream(
+#             model=model,
+#             contents=contents,
+#             config=generate_content_config,
+#     ):
+#         if hasattr(chunk, "text"):
+#             full_text += chunk.text
+#
+#     return full_text
 
 
 def translate_with_gemini(
