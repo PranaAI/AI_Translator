@@ -158,6 +158,7 @@ Command for that are
 
 ```sh
 python.exe -m pip install --upgrade pip             # updates the pip
+pip install --upgrade pip                           # on linux
 pip install -r requirements.txt                     # install all the needed python packages
 ```
 
